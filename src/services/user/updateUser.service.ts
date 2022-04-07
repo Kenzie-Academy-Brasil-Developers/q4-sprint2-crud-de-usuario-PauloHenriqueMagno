@@ -9,8 +9,9 @@ export const updateUserService = async (req: Request, res: Response) => {
 
     const { password, ...updatedUser } = await new UserRepository().findUserByUuid(uuid);
 
-    return updatedUser;
-  };
+    req.user = updatedUser;
 
-  return res.status(401).json({ message: "Missing admin permissions" });
+  } else {
+    return res.status(401).json({ message: "Missing admin permissions" });
+  }
 }

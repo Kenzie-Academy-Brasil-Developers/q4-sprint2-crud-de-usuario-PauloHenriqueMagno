@@ -11,16 +11,14 @@ export const loginService = async (req: Request, res: Response) => {
   const user = await new UserRepository().findUserByEmail(email);
 
   if (!user) {
-    res.status(401).json({ message: "Wrong email/password" });
+    return res.status(401).json({ message: "Wrong email/password" });
   }
 
   const match = bcrypt.compareSync(password, user.password);
   
   if (!match) {
-    res.status(401).json({ message: "Wrong email/password" });
+    return res.status(401).json({ message: "Wrong email/password" });
   }
-
-  console.log(user);
 
   const token = jsonwebtoken.sign({
       email: user.email,
@@ -31,5 +29,5 @@ export const loginService = async (req: Request, res: Response) => {
     { expiresIn: JWTConfig.expiresIn }
   );
 
-  return token;
+  req.token = token;
 };

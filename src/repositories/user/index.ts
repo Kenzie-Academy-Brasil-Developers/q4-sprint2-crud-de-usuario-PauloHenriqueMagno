@@ -13,9 +13,9 @@ class UserRepository implements IUserRepo {
 
   createUser = async (user: IUser) => await this.ormRepo.save(user);
 
-  findUserByEmail = async (email: string) => await this.ormRepo.findOneOrFail({ where: { email } });
+  findUserByEmail = async (email: string) => await this.ormRepo.findOne({ where: { email } });
 
-  findUserByUuid = async (uuid: string) => await this.ormRepo.findOneOrFail({ where: { uuid } });
+  findUserByUuid = async (uuid: string) => await this.ormRepo.findOne({ where: { uuid } });
 
   findUsers = async () => await this.ormRepo.find();
 

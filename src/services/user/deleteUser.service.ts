@@ -1,15 +1,11 @@
-import { Request, Response } from "express";
+import { Request } from "express";
 
 import { UserRepository } from "../../repositories/user";
 
-export const deleteUserService = async (req: Request, res: Response) => {
+export const deleteUserService = async (req: Request) => {
   const { uuid } = req.params;
   
-  if (req.uuid === uuid || req.isAdm) {
-    const deletedUser = await new UserRepository().deleteUser(uuid);
-
-    return deletedUser;
-  };
-
-  return res.status(401).json({ message: "Missing admin permissions" });
-}
+  const deleteResulte = await new UserRepository().deleteUser(uuid);
+  
+  return deleteResulte
+};

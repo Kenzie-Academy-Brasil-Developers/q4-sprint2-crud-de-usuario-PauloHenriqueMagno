@@ -5,7 +5,7 @@ interface IUser {
   uuid: string;
   name: string;
   email: string;
-  password: string;
+  password?: string;
   isAdm: boolean;
   createdOn: Date;
   updatedOn: Date;
